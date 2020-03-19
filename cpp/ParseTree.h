@@ -42,9 +42,9 @@ public:
 class ParseTree {
 public:
 
-    void ReadInput(char alphaFile[], char dataFile[]);
+    void ReadInput(char alphabet[], char dataFile[]);
 
-    void ReadProcessMultiLine(char alphaFile[], char dataFile[]);
+    void ReadProcessMultiLine(char alphabet[], char dataFile[]);
 
     void Insert(char string[]) { Insert(string, m_root); }
 

@@ -26,6 +26,12 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////
+//    20/03/2020:
+//       Haohua Li changed Test.cpp, the details of this modification can 
+//       be viewed in the commits of CSSR-Matlab.  
+//////////////////////////////////////////////////////////////////////////////
+
 #include "Test.h"
 
 //chstwo ---- calculates chi-square for two distributions
@@ -178,8 +184,7 @@ float Test::gammln(float xx) {
 }
 
 void Test::nerror(const char error_text[]) {
-  cerr << error_text << endl;
-  exit(1);
+  mexErrMsgTxt(error_text);
 }
 
 double Test::RunTest(double dist1[], int count1, double dist2[], int count2, int distSize) {
@@ -190,8 +195,8 @@ double Test::RunTest(double dist1[], int count1, double dist2[], int count2, int
     return RunChiTest(dist1, count1, dist2, count2, distSize);
   }
   else {
-    cerr << "No type of statistical test set" << endl;
-    exit(1);
+    mexErrMsgTxt("No type of statistical test set\n");
+    return 0;
   }
 }
 

@@ -71,7 +71,7 @@ public:
         const bool &,
         int);
 
-    void PrintDot(char input[], char alpha[]);
+    void PrintDot(char output[], char alpha[]);
 
 private:
     double m_relEnt;         //relative entropy of machine

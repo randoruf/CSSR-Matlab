@@ -39,8 +39,7 @@ void G_Array::Grow(int newsize) {
   ArrayElem **newBuffer = NULL;
   newBuffer = new ArrayElem *[newsize];
   if (newBuffer == NULL) {
-    cerr << "Out of memory." << endl;
-    exit(1);
+    mexErrMsgTxt("Out of memory."); 
   }
 
   //copy array contents into newBuffer

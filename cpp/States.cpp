@@ -27,6 +27,13 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 //////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////
+//    20/03/2020:
+//       Haohua Li changed States.cpp, the details of this modification can 
+//       be viewed in the commits of CSSR-Matlab.  
+//////////////////////////////////////////////////////////////////////////////
+
 #include "States.h"
 
 
@@ -305,9 +312,7 @@ void State::RemoveString(StringElem *element) {
            temp->m_nextPtr != NULL && temp->m_nextPtr != element;
            temp = temp->m_nextPtr) { }
       if (temp->m_nextPtr == NULL) {
-        cerr << "trying to remove a string which does not exist in"
-        << " state";
-        exit(1);
+        mexErrMsgTxt("trying to remove a string which does not exist in state");
       }
       if (temp->m_nextPtr == m_listTail) {
         m_listTail = temp;

@@ -28,6 +28,11 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////
+//    20/03/2020:
+//       Haohua Li changed Allstates.cpp, the details of this modification can 
+//       be viewed in the commits of CSSR-Matlab.  
+//////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -43,19 +48,15 @@
 // Pre- Cond: all states have been created up to maximum length of strings
 // Post-Cond: output file exists with states listed inside
 //////////////////////////////////////////////////////////////////////////
-void AllStates::PrintOut(char input[], char alpha[]) {
+
+void AllStates::PrintOut(char output[], char alpha[]) {
   bool success = true;
-  char *output = new char[strlen(input) + 8 + END_STRING];
-
-  strcpy(output, input);
-  strcat(output, "_results");
-
   //create file streams
   ofstream outData(output, ios::out);
 
   //open output file, if unsuccessful set boolean return value
   if (!outData) {
-    cerr << " the results output file cannot be opened " << endl;
+    mexErrMsgIdAndTxt("MATLAB:CSSR:OpenFileFailed", " the results output file cannot be opened ");
     success = false;
   }
   else {
@@ -67,7 +68,6 @@ void AllStates::PrintOut(char input[], char alpha[]) {
   }
 
   outData.close();
-  delete[] output;
 }
 
 
@@ -88,8 +88,7 @@ void AllStates::Grow(int newsize) {
   newBuffer = new State *[newsize];
 
   if (newBuffer == NULL) {
-    cerr << "Out of memory." << endl;
-    exit(1);
+    mexErrMsgTxt("Out of memory"); 
   }
 
   //set each pointer to NULL
@@ -799,8 +798,7 @@ void AllStates::AllocateArray(int **stateArray, int arraySize) {
     stateArray[i] = NULL;
     stateArray[i] = new int[arraySize];
     if (stateArray[i] == NULL) {
-      cerr << "Out of memory\n";
-      exit(1);
+      mexErrMsgTxt("Out of memory"); 
     }
     for (int j = 0; j < arraySize; j++) {
       stateArray[i][j] = NULL_STATE;
@@ -1233,7 +1231,7 @@ void AllStates::RemoveState(int index) {
 // Pre- Cond: state transitions have been determined
 // Post-Cond: state distributions have been determined
 //////////////////////////////////////////////////////////////////////////
-void AllStates::GetStateDistsMulti(ParseTree &parsetree, char input[],
+void AllStates::GetStateDistsMulti(ParseTree &parsetree, char output_name[],
                                    HashTable2 *hashtable, bool isMulti) {
   char *data = parsetree.getData();
   int dataLength = strlen(data);
@@ -1247,21 +1245,14 @@ void AllStates::GetStateDistsMulti(ParseTree &parsetree, char input[],
   int state = NULL_STATE;
   int *counts = new int[m_arraySize];
   char *symbol = new char[2];
-  char *inputFile = new char[strlen(input) + 13 + END_STRING];
   int diff = 0;
   char *synchString0 = new char[MAX_STRING + 2 + END_STRING];
 
-  //create file streams
-  strcpy(inputFile, input);
-  strcat(inputFile, "_state_series");
-  ofstream outData(inputFile, ios::out);
-
+  ofstream outData(output_name, ios::out);
   //open output file, if unsuccessful set boolean return value
-  if (!outData) {
-    cerr << " the state series output file cannot be opened " << endl;
-    exit(1);
+  if(!outData) {
+      mexErrMsgTxt(" the state series output file cannot be opened "); 
   }
-    //otherwise output data
   else {
     //initializations
     for (int j = 0; j < m_arraySize; j++) {
@@ -1283,7 +1274,7 @@ void AllStates::GetStateDistsMulti(ParseTree &parsetree, char input[],
     adjustedDataLength -= (i - 1);
     symbol[0] = data[i];
     counts[state]++;
-    outData << state << ";";
+    outData << state << ",";
 
     //get series of states, and make frequency counts
     while (i < dataLength) {
@@ -1310,7 +1301,7 @@ void AllStates::GetStateDistsMulti(ParseTree &parsetree, char input[],
         diff = i - diff - 1;
         adjustedDataLength -= diff;
         counts[state]++;
-        outData << state << ";";
+        outData << state << ",";
         symbol[0] = data[i];
       }
 
@@ -1337,7 +1328,7 @@ void AllStates::GetStateDistsMulti(ParseTree &parsetree, char input[],
         adjustedDataLength -= diff;
       }
       counts[state]++;
-      outData << state << ";";
+      outData << state << ",";
       i++;
       symbol[0] = data[i];
     }
@@ -1347,11 +1338,10 @@ void AllStates::GetStateDistsMulti(ParseTree &parsetree, char input[],
       m_StateArray[q]->setFrequency((double) counts[q] / (double)
           adjustedDataLength);
     }
-  }
+  } 
 
   delete[] counts;
   delete[] symbol;
-  delete[] inputFile;
   delete[] synchString0;
 }
 
@@ -1378,14 +1368,8 @@ bool AllStates::CheckSynchError(int index, int state, char *&synchString0,
   if (diff > 0) {
     //if state is still null here, something is VERY wrong
     if (state == NULL_STATE && ((index >= dataSize - 1) || (!isMulti))) {
-      cerr << "\nError: Could not synchronize, cannot use this data. "
-      << endl
-      << "AllStates::GetStateDistsMulti\n" << endl
-      << "Note: For some reason this program cannot synchronize to a"
-      << "state at any point in the data.  "
-      << "See 'ReadMe' for details.\n"
-      << endl;
-      exit(1);
+      std::cerr << "Error: Could not synchronize, cannot use this data. -> AllStates::GetStateDistsMulti" << std::endl; 
+      mexErrMsgIdAndTxt("MATLAB:CSSR:synchronizeError", "Note: For some reason this program cannot synchronize to astate at any point in the data. See <https://github.com/stites/CSSR#5-known-issues> for details."); 
     }
       //if end of line reached before synched
     else if (state == NULL_STATE && isMulti) {
@@ -1435,7 +1419,7 @@ int AllStates::SynchToStatesMulti(int &index, int &lineIndex, int state,
   //synchronize to states
   do {
     if (lineIndex > 0) {
-      *outData << "?;";
+      *outData << "?,";
     }
 
     state = m_table->WhichStateNumber(string);

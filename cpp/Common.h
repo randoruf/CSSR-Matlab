@@ -4,7 +4,14 @@
 //Date:		March 20, 2002
 //Description:	Header file for use with all files in 'CSSR' program
 //
-////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////
+//    20/03/2020:
+//       Haohua Li changed Common.h, the details of this modification can 
+//       be viewed in the commits of CSSR-Matlab.  
+//////////////////////////////////////////////////////////////////////////////
+
 #ifndef COMMON_H
 #define COMMON_H
 
@@ -17,6 +24,8 @@
 #include <iomanip>
 #include <string.h>
 #include <ctype.h>
+#include <string>
+#include "mex.h"
 
 #define INCREMENT 10     //size of array growth
 #define INITIAL_SIZE 50  //intial size of array of states

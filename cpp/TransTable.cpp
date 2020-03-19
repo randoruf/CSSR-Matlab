@@ -27,6 +27,13 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////
+//    20/03/2020:
+//       Haohua Li changed TransTable.cpp, the details of this modification can 
+//       be viewed in the commits of CSSR-Matlab.  
+//////////////////////////////////////////////////////////////////////////////
+
+
 #include "TransTable.h"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -97,8 +104,7 @@ void TransTable::setTrans(int transState, StringElem *string, int parentState) {
       TransNode *temp1 = new TransNode;
       TransNode *temp3 = new TransNode;
       if (temp1 == NULL || temp3 == NULL) {
-        cerr << "Out of memory." << endl;
-        exit(1);
+        mexErrMsgTxt("Out of memory.\n");
       }
       //set array which finds by transition state
       temp1->stringPtr = string;

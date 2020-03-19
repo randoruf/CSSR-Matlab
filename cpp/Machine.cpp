@@ -29,6 +29,13 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////
+//    20/03/2020:
+//       Haohua Li changed Machine.cpp, the details of this modification can 
+//       be viewed in the commits of CSSR-Matlab.  
+//////////////////////////////////////////////////////////////////////////////
+
+
 #include "Machine.h"
 
 /////////////////////////////////////////////////////////////////////////////
@@ -480,8 +487,8 @@ void Machine::CalcEntRate() {
 //            been calculated
 // Post-Cond: output file exists with information listed inside
 //////////////////////////////////////////////////////////////////////////
-void Machine::PrintOut(char input[],
-                       const char *alpha_file,
+void Machine::PrintOut(char output[],
+                       const char *alphabet,
                        const char *data_file,
                        const int &max_length,
                        const double &sigLevel,
@@ -489,22 +496,16 @@ void Machine::PrintOut(char input[],
                        const bool &isChi,
                        int alphaSize
 ) {
-  char *output = new char[strlen(input) + 6];
-
-  strcpy(output, input);
-  strcat(output, "_info");
-
   //create file streams
   ofstream outData(output, ios::out);
 
   //open output file, if unsuccessful set boolean return value
   if (!outData) {
-    cerr << " the information output file cannot be opened " << endl;
-    exit(1);
+    mexErrMsgTxt(" the information output file cannot be opened \n");
     //otherwise output data
   }
   else {
-    outData << "Alphabet File: " << alpha_file << endl;
+    outData << "Alphabet set: {" << alphabet << "}"<<endl;
     outData << "Data File: " << data_file << endl;
     outData << "History Length: " << max_length << endl;
     outData << "Significance Level: " << sigLevel << endl;
@@ -519,21 +520,19 @@ void Machine::PrintOut(char input[],
     outData << "Number of Inferred States: " << m_allstates->getArraySize()
     << endl;
 
+    /* (2) it has to re-synchronize at some point */ 
     if (m_allstates->getReSynch()) {
-      outData << "This data needed to be synchronized to a set"
-      << " of states more than once.  It is recommended that"
-      << " you try a longer history length, as this set of"
-      << " states cannot possibly be the causal states." << endl;
+      outData << "This data needed to be synchronized to a set of states more than once.  "
+      << " It is recommended that you try a longer history length, "
+      << "as this set of states cannot possibly be the causal states." << endl;
 
       //Print to screen also
       cout << endl
-      << "The data in " << input << endl
-      << "needed to be resynchronized; try to"
-      << " increase max length." << endl << endl;
+      << "The data in " << output << endl
+      << "needed to be resynchronized; try to increase max length." << endl << endl;
     }
   }
   outData.close();
-  delete[] output;
 }
 
 
@@ -546,19 +545,13 @@ void Machine::PrintOut(char input[],
 // Pre- Cond: all values in array of states have been set
 // Post-Cond: output .dot file exists with machine
 //////////////////////////////////////////////////////////////////////////
-void Machine::PrintDot(char input[], char alpha[]) {
-  char *output = new char[strlen(input) + 9];
-
-  strcpy(output, input);
-  strcat(output, "_inf.dot");
-
+void Machine::PrintDot(char output[], char alphabet[]) {
   //create file streams
   ofstream outData(output, ios::out);
 
   //open output file, if unsuccessful exit
   if (!outData) {
-    cerr << " the .dot output file cannot be opened " << endl;
-    exit(1);
+    mexErrMsgTxt(" the .dot output file cannot be opened \n"); 
 
     //otherwise output data
   }
@@ -569,8 +562,8 @@ void Machine::PrintDot(char input[], char alpha[]) {
     int nextState;
     double *dist;
 
-    outData << "digraph \"" << input << "\" {" << endl;
-    outData << "size = \"6,8.5\";" << endl;
+    outData << "digraph \"" << output << "\" {" << endl;
+    outData << "size = \"12,17\";" << endl;
     outData << "ratio = \"fill\";" << endl;
     outData << "node [shape = circle];" << endl;
     outData << "node [fontsize = 24];" << endl;
@@ -582,15 +575,13 @@ void Machine::PrintDot(char input[], char alpha[]) {
         dist = state->getCurrentDist();
         nextState = state->getTransitions(k);
         if (nextState != NULL_STATE) {
-          outData << i << " -> "
-          << nextState;
-          outData << " [label = \"" << alpha[k]
-          << ": " << setiosflags(ios::left) << setw(7) << setprecision(4) << dist[k] << "  \"];" << endl;
+          outData << i << " -> " << nextState;
+          outData << " [label = \"" << alphabet[k]
+          << ": " << setiosflags(ios::left) << setw(7) << setprecision(6) << dist[k] << "  \"];" << endl;
         }
       }
     }
     outData << "}";
   }
   outData.close();
-  delete[] output;
 }

@@ -27,6 +27,12 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////
+//    20/03/2020:
+//       Haohua Li changed Hasp.cpp, the details of this modification can 
+//       be viewed in the commits of CSSR-Matlab.  
+//////////////////////////////////////////////////////////////////////////////
+
 #include "Hash.h"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -74,8 +80,7 @@ int HashTable::Hash(ulong key) {
 ////////////////////////////////////////////////////////////////
 void HashTable::Insert(StringElem *elem, State *state) {
   if (elem == NULL) {
-    cerr << "Cannot insert null pointer into Hash Table\n";
-    exit(1);
+    mexErrMsgTxt("Cannot insert null pointer into Hash Table\n");
   }
 
   ulong key = CreateKey(elem->m_string);
@@ -85,8 +90,7 @@ void HashTable::Insert(StringElem *elem, State *state) {
   if ((hashValue >= 0) && (hashValue < HASHSIZE)) {
     HashTableEntry *temp1 = new HashTableEntry;
     if (temp1 == NULL) {
-      cerr << "Out of memory." << endl;
-      exit(1);
+      mexErrMsgTxt("Out of memory");
     }
 
     temp1->m_stringPtr = elem;
@@ -110,10 +114,6 @@ void HashTable::Insert(StringElem *elem, State *state) {
 //Return value: pointer to address of appropriate state
 ////////////////////////////////////////////////////////////////
 State *HashTable::WhichState(char *string) {
-  if (string == '\0') {
-    cerr << "Cannot check matching state for empty string\n";
-    exit(1);
-  }
 
   ulong currentKey = CreateKey(string);
   int hashValue = Hash(currentKey);
@@ -140,10 +140,6 @@ State *HashTable::WhichState(char *string) {
 //Return value: assigned number of appropriate state
 ////////////////////////////////////////////////////////////////
 int HashTable::WhichStateNumber(char *string) {
-  if (string == '\0') {
-    cerr << "Cannot check matching state for empty string\n";
-    exit(1);
-  }
 
   ulong currentKey = CreateKey(string);
   int hashValue = Hash(currentKey);
@@ -192,10 +188,6 @@ void HashTable::Print() {
 
 
 void HashTable::RemoveString(char *string) {
-  if (string == '\0') {
-    cerr << "Cannot check matching state for empty string\n";
-    exit(1);
-  }
 
   ulong currentKey = CreateKey(string);
   int hashValue = Hash(currentKey);

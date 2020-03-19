@@ -26,6 +26,13 @@
 //    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 //
 //////////////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////////////
+//    20/03/2020:
+//       Haohua Li changed Hash2.cpp, the details of this modification can 
+//       be viewed in the commits of CSSR-Matlab.  
+//////////////////////////////////////////////////////////////////////////////
+
 #include "Hash2.h"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -78,14 +85,12 @@ int HashTable2::Hash(ulong key) {
 ////////////////////////////////////////////////////////////////
 void HashTable2::Insert(char *string, int index) {
   if (string == NULL) {
-    cerr << "Cannot insert null pointer into Hash Table\n";
-    exit(1);
+    mexErrMsgTxt("Cannot insert null pointer into Hash Table\n");
   }
   char *tempstring = NULL;
   tempstring = new char[strlen(string) + 1];
   if (tempstring == NULL) {
-    cerr << "Out of memory." << endl;
-    exit(1);
+    mexErrMsgTxt("Out of memory.\n"); 
   }
 
   strcpy(tempstring, string);
@@ -97,8 +102,7 @@ void HashTable2::Insert(char *string, int index) {
     HashTable2Entry *temp1 = NULL;
     temp1 = new HashTable2Entry;
     if (temp1 == NULL) {
-      cerr << "Out of memory." << endl;
-      exit(1);
+      mexErrMsgTxt("Out of memory.\n");
     }
     temp1->m_string = tempstring;
     temp1->m_index = index;
@@ -122,10 +126,6 @@ void HashTable2::Insert(char *string, int index) {
 ////////////////////////////////////////////////////////////////
 int HashTable2::WhichIndex(char *string) {
   int index;
-  if (string == '\0') {
-    cerr << "Cannot check matching state for empty string\n";
-    exit(1);
-  }
 
   ulong currentKey = CreateKey(string);
   int hashValue = Hash(currentKey);
@@ -142,11 +142,7 @@ int HashTable2::WhichIndex(char *string) {
   }
 
   if (index == -1) {
-    cerr << "HashTable2::WhichIndex: String or symbol not in table.\n"
-    << "A string/history has been encountered in the data which has"
-    << "not been recorded in the set of states.  "
-    << "See 'ReadMe' file for details";
-    exit(1);
+    mexErrMsgTxt("HashTable2::WhichIndex: String or symbol not in table.\nA string/history has been encountered in the data which has not been recorded in the set of states.  See 'ReadMe' file for details\n\n");
   }
   return index;
 }

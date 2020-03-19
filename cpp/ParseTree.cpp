@@ -29,6 +29,13 @@
 //
 //////////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////////
+//    20/03/2020:
+//       Haohua Li changed ParseTree.cpp, the details of this modification can 
+//       be viewed in the commits of CSSR-Matlab.  
+//////////////////////////////////////////////////////////////////////////////
+
+
 #include "ParseTree.h"
 
 
@@ -141,8 +148,8 @@ void ParseTree::RemoveTree(TreeNode *&root) {
 //            along with the counts of their children strings
 //////////////////////////////////////////////////////////////////////////
 void ParseTree::FindStrings(int length, G_Array *array) {
-  char *parentString = '\0';
-  FindStrings(m_root, length, parentString, array);
+  char parentString = '\0';
+  FindStrings(m_root, length, &parentString, array);
   return;
 }
 
@@ -183,7 +190,7 @@ void ParseTree::FindStrings(TreeNode *root, int length, char *parentString,
   else if (length < 2) {
     //determine length of parentString
     int stringLength = 0;
-    if (parentString != '\0') {
+    if (*parentString != '\0') {
       stringLength = strlen(parentString);
     }
 
@@ -234,7 +241,7 @@ void ParseTree::FindStrings(TreeNode *root, int length, char *parentString,
   else {
     //determine length of parentString
     int stringLength2 = 0;
-    if (parentString != '\0') {
+    if (*parentString != '\0') {
       stringLength2 = strlen(parentString);
     }
 
@@ -321,10 +328,8 @@ void ParseTree::GetDataInput(char dataFile[]) {
 
   //open data file, if unsuccessful set boolean return value
   if (!inData.is_open()) {
-    cerr << " the data file cannot be opened " << endl;
-    exit(1);
+    mexErrMsgTxt(" the data file cannot be opened ");
   }
-    //otherwise read in data until end of file
   else {
     inData.seekg(0, ios::end);
     size = inData.tellg();
@@ -360,40 +365,11 @@ void ParseTree::GetDataInput(char dataFile[]) {
 //	          size of alphabet file must be smaller than data file
 // Post-Cond: Alphabet info in ParseTree is initialized
 //////////////////////////////////////////////////////////////////////////
-void ParseTree::GetAlphaInput(char alphaFile[]) {
-  int size;
-  int offset = 1;
-
-  //create file streams
-  ifstream inAlpha(alphaFile, ios::in);
-
-  //open alphabet file, if unsuccessful set boolean return value
-  if (!inAlpha.is_open()) {
-    cerr << " the alphabet file cannot be opened " << endl;
-    exit(1);
-  }
-
-    //otherwise read in data until end of file
-  else {
-    inAlpha.seekg(0, ios::end);
-    size = inAlpha.tellg();
-    inAlpha.seekg(0, ios::beg);
-    m_alpha = new char[size + 1];
-    inAlpha.get(m_alpha, size + 1, '\0');
-    if (m_alpha[size - 2] == '\n') {
-      offset = 2;
-    }
-    else if (m_alpha[size - 1] == '\n') {
-      offset = 1;
-    }
-    else if (isalnum(m_data[size - 1])) {
-      offset = 0;
-    }
-
-    m_alpha[size - offset] = '\0';
-    inAlpha.close();
-    m_alphaSize = strlen(m_alpha);
-  }
+void ParseTree::GetAlphaInput(char alphabet[]) {
+  m_alpha = alphabet; 
+  m_alphaSize = strlen(m_alpha);
+    
+  return; 
 }
 
 
@@ -407,32 +383,11 @@ void ParseTree::GetAlphaInput(char alphaFile[]) {
 // Post-Cond: Alphabet information in ParseTree class is valid
 //////////////////////////////////////////////////////////////////////////
 void ParseTree::CheckAlphaInput() {
-  char *tempAlpha = new char[m_alphaSize];
-  char seps[] = " ,\t\n\r";
-  char *token;
-
-  //first, remove white spaces, tabs, or endlines
-  token = strtok(m_alpha, seps);
-  strcpy(tempAlpha, token);
-  while (token != NULL) {
-    /* Get next token: */
-    token = strtok(NULL, seps);
-    if (token != NULL) {
-      strcat(tempAlpha, token);
-    }
-  }
-
-  //make necessary adjustments to alphabet and size
-  delete m_alpha;
-  m_alpha = tempAlpha;
-  m_alphaSize = strlen(m_alpha);
-  //check alpha stream for nonsense or spaces
-  //if nonsense, output error, if space, remove space
   for (int k = 0; k < m_alphaSize; k++) {
     if (!(isalnum(m_alpha[k]))) {
       cerr << "Alphabet contains characters which are not alphanumeric: "
       << m_alpha[k] << "\n";
-      exit(1);
+      mexErrMsgTxt("Please check the alphabet set.\n");
     }
   }
 }
@@ -485,7 +440,7 @@ void ParseTree::CheckDataInput() {
     else {
       cerr << "Data contains characters which are not in the alphabet: "
       << m_data[i] << "\n";
-      exit(1);
+      mexErrMsgTxt("Please check the data set.\n");
     }
   }
 }
@@ -501,10 +456,10 @@ void ParseTree::CheckDataInput() {
 //	          size of alphabet file must be smaller than data file
 // Post-Cond: Alphabet,Data arrays and related info in ParseTree class set
 //////////////////////////////////////////////////////////////////////////
-void ParseTree::ReadInput(char alphaFile[], char dataFile[]) {
+void ParseTree::ReadInput(char alphabet_vector[], char dataFile[]) {
   //Read in files
+  GetAlphaInput(alphabet_vector);
   GetDataInput(dataFile);
-  GetAlphaInput(alphaFile);
 
   //Remove any extra spaces, endlines, etc.
   //And make sure input is valid
@@ -532,9 +487,7 @@ void ParseTree::DecStringCount(char string[], TreeNode *&root) {
   //a node does not exist for this substring 
   if (root == NULL) {
     //no match
-    cerr << "Attempting to decrement occurence of string which doesn't "
-    << "show up in data,  ParseTree::DecStringCount " << endl;
-    exit(1);
+    mexErrMsgTxt("Attempting to decrement occurence of string which doesn't \nshow up in data,  ParseTree::DecStringCount ");
   }
     //this substring already exists
   else if (root->m_symbol == string[0]) {
@@ -554,9 +507,7 @@ void ParseTree::DecStringCount(char string[], TreeNode *&root) {
     //or if not, it should be added there
     if (*temp == NULL) {
       //no match
-      cerr << "Attempting to decrement occurence of string which doesn't "
-      << "show up in data,  ParseTree::DecStringCount " << endl;
-      exit(1);
+      mexErrMsgTxt("Attempting to decrement occurence of string which doesn't \nshow up in data,  ParseTree::DecStringCount "); 
     }
     (*temp)->m_count--;
     //recursive call made with sibling node
@@ -626,7 +577,7 @@ void ParseTree::MakeSynchAdjustements(char *synchString, int index) {
 //	          size of alphabet file must be smaller than data file
 // Post-Cond: Alphabet and Data arrays are set, and tree is filled
 //////////////////////////////////////////////////////////////////////////
-void ParseTree::ReadProcessMultiLine(char alphaFile[], char dataFile[]) {
+void ParseTree::ReadProcessMultiLine(char alphabet[], char dataFile[]) {
   int size = 0;
   int total_size = 0;
   char *buffer = new char[MAX_LINE_SIZE + END_STRING];
@@ -635,39 +586,22 @@ void ParseTree::ReadProcessMultiLine(char alphaFile[], char dataFile[]) {
 
   //create file streams
   ifstream inData(dataFile, ios::in);
-  ifstream inAlpha(alphaFile, ios::in);
 
-  //open alphabet file, if unsuccessful set boolean return value
-  if (!inAlpha.is_open()) {
-    cerr << " the alphabet file cannot be opened " << endl;
-    exit(1);
-  }
-
-    //otherwise read in data until end of file
-  else {
-    inAlpha.seekg(0, ios::end);
-    size = inAlpha.tellg();
-    inAlpha.seekg(0, ios::beg);
-    m_alpha = new char[size + 1];
-    inAlpha.get(m_alpha, size + 1, '\0');
-    if (m_alpha[size - 2] == '\n') {
-      offset = 2;
+  //read alphabet array
+  m_alpha = alphabet; 
+  m_alphaSize = strlen(m_alpha);
+  //check alphabet
+  for (int k = 0; k < m_alphaSize; k++) {
+    if (!(isalnum(m_alpha[k]))) {
+      cerr << "Alphabet contains characters which are not alphanumeric."
+      << m_alpha[k] << "\n";
+      mexErrMsgTxt("Please check the alphabet set.");
     }
-    else if (m_alpha[size - 1] == '\n') {
-      offset = 1;
-    }
-    else if (isalnum(m_data[size - 1])) {
-      offset = 0;
-    }
-    m_alpha[size - offset] = '\0';
-    inAlpha.close();
-    m_alphaSize = strlen(m_alpha);
   }
 
   //open data file, if unsuccessful set boolean return value
   if (!inData.is_open()) {
-    cerr << " the data file cannot be opened " << endl;
-    exit(1);
+    mexErrMsgTxt(" the data file cannot be opened ");
   }
     //otherwise read in data until end of line, then
     //fill tree with each line
@@ -701,15 +635,6 @@ void ParseTree::ReadProcessMultiLine(char alphaFile[], char dataFile[]) {
     inData.get(m_data, total_size, '\0');
     inData.close();
 
-    //check alphabet
-    for (int k = 0; k < m_alphaSize; k++) {
-      if (!(isalnum(m_alpha[k]))) {
-        cerr << "Alphabet contains characters which are not"
-        << " alphanumeric.\n";
-        exit(1);
-      }
-    }
-
     //check data stream
     for (int i = 0; i < m_dataSize; i++) {
       for (int j = 0; j < m_alphaSize; j++) {
@@ -721,9 +646,9 @@ void ParseTree::ReadProcessMultiLine(char alphaFile[], char dataFile[]) {
         accept_flag = false;
       }
       else {
-        cerr << "Data contains characters which are not in the"
-        << " alphabet.\n";
-        exit(1);
+        cerr << "Data contains characters which are not in the alphabet."
+        << m_data[i] << "\n";
+        mexErrMsgTxt("Please check the data set.");
       }
     }
   }
@@ -747,8 +672,7 @@ int ParseTree::FindRoots(TreeNode *root, char charArray[], int intArray[]) {
 
   //check to make sure data exists
   if (m_dataSize == 0) {
-    cerr << "no data in tree" << endl;
-    exit(1);
+    mexErrMsgTxt("no data in tree\n");
   }
   while (root != NULL) {
     charArray[size] = root->m_symbol;
