@@ -132,13 +132,13 @@ CSSR-Matlab is licensed as GNU General Public License version 2.
 
 CSSR v0.1.1 Copyright (C) 2002, Kristina Klinkner and Cosma Shalizi. 
 
-All main changes to CSSR can be view in GitHub [commits](https://github.com/randoruf/CSSR-Matlab/commit/6063581b4946a48bad61c78c16f529bd2e5efda8).
+All main changes to CSSR can be viewed in GitHub [commits](https://github.com/randoruf/CSSR-Matlab/commit/6063581b4946a48bad61c78c16f529bd2e5efda8).
 
 ## Acknowledgements
 
 Although this is a small project, I still would like to say thanks to people in [tLab](https://sites.google.com/monash.edu/tlab/home). And I am grateful to the effort from [Cosma Shalizi](http://bactra.org/) and Kristina Klinkner, they purposed and developed the theory of CSSR. 
 
-## Related Resource 
+## Related Resources
 
 * The original website of CSSR http://bactra.org/CSSR/
 * The original GitHub repository of CSSR https://github.com/stites/CSSR
