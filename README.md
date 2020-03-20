@@ -1,4 +1,5 @@
 # CSSR-Matlab
+[![View CSSR-Matlab on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://au.mathworks.com/matlabcentral/fileexchange/74604-cssr-matlab)
 
 **Note that CSSR-Matlab is NOT an official distribution**. This program attempts to bind CSSR with Matlab such that CSSR can run within Matlab. 
 
