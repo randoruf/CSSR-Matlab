@@ -4,6 +4,8 @@
 
 Before using CSSR-Matlab, it is recommended to read documentations published in the CSSR official website http://www.bactra.org/CSSR. CSSR-Matlab is based on CSSR, the original algorithm CSSR is developed by [Cosma Shalizi](http://bactra.org/) and Kristina Klinkner. 
 
+If you decide to use CSSR-Matlab, please appropriately cite the paper "Blind Construction of Optimal Nonlinear Recursive Predictors for Discrete Sequences",  [arXiv:cs/0406011 [cs.LG]](https://arxiv.org/abs/cs/0406011). 
+
 
 
 ## CSSR-Matlab Usage 
@@ -124,7 +126,17 @@ However, for a fixed-length N data stream, if keep increasing history length L f
 
 For more details, please see https://github.com/stites/CSSR#4-some-suggestions-about-parameters. 
 
-## Thanks
+## License
+
+CSSR-Matlab is licensed as GNU General Public License version 2. 
+
+Please read `LICENSE` file for details. 
+
+## Acknowledgements
 
 Although this is a small project, I still would like to say thanks to people in [tLab](https://sites.google.com/monash.edu/tlab/home). And I am grateful to the effort from [Cosma Shalizi](http://bactra.org/) and Kristina Klinkner, they purposed and developed the theory of CSSR. 
 
+## Related Resource 
+
+* The original website of CSSR http://bactra.org/CSSR/
+* The original GitHub repository of CSSR https://github.com/stites/CSSR
