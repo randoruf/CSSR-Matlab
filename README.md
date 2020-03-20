@@ -130,7 +130,9 @@ For more details, please see https://github.com/stites/CSSR#4-some-suggestions-a
 
 CSSR-Matlab is licensed as GNU General Public License version 2. 
 
-Please read `LICENSE` file for details. 
+CSSR v0.1.1 Copyright (C) 2002, Kristina Klinkner and Cosma Shalizi. 
+
+All main changes to CSSR can be view in GitHub [commits](https://github.com/randoruf/CSSR-Matlab/commit/6063581b4946a48bad61c78c16f529bd2e5efda8).
 
 ## Acknowledgements
 
