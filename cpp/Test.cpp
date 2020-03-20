@@ -37,24 +37,24 @@
 //chstwo ---- calculates chi-square for two distributions
 // After Numerical Recipes in C
 void Test::chstwo(double bins1[], int n1, double bins2[], int n2, int nbins,
-                  int knstrn, float *df, float *chsq, double *prob) {
+                  int knstrn, double *df, double *chsq, double *prob) {
   int j;
-  float temp;
+  double temp;
 
   *df = nbins - knstrn;
   *chsq = 0.0;
-  float ratio1;
-  float ratio2;
+  double ratio1;
+  double ratio2;
 
   if (n1 > 0) {
-    ratio1 = (float) (((float) sqrt(n2)) / ((float) sqrt(n1)));
+    ratio1 = sqrt(n2) / sqrt(n1);
   }
   else {
     ratio1 = 0.0;
   }
 
   if (n2 > 0) {
-    ratio2 = (float) (((float) sqrt(n1)) / ((float) sqrt(n2)));
+    ratio2 = sqrt(n1) / sqrt(n2);
   }
   else {
     ratio2 = 0.0;
@@ -74,8 +74,8 @@ void Test::chstwo(double bins1[], int n1, double bins2[], int n2, int nbins,
 
 
 //gammq  ---- returns the incomplete gamma function Q(a,x) = 1 - P(a,x).
-float Test::gammq(float a, float x) {
-  float gamser, gammcf, gln;
+double Test::gammq(double a, double x) {
+  double gamser, gammcf, gln;
 
   //cout <<"a " << a<< " x "<<x<<endl;
   if (x < 0.0 || a <= 0.0) {
@@ -95,9 +95,9 @@ float Test::gammq(float a, float x) {
 //gser --- Returns the incomplete gamma function P(a,x) 
 //evaluated by its series representation.  Also returns
 //natural log of gamma(a)
-void Test::gser(float *gamser, float a, float x, float *gln) {
+void Test::gser(double *gamser, double a, double x, double *gln) {
   int n;
-  float sum, del, ap;
+  double sum, del, ap;
   *gln = gammln(a);
 
   if (x <= 0.0) {
@@ -111,7 +111,7 @@ void Test::gser(float *gamser, float a, float x, float *gln) {
     ap = a;
     del = sum = 1.0 / a;
     for (n = 1; n <= ITMAX; n++) {
-      ++ap;
+      ap += 1.0;
       del *= x / ap;
       sum += del;
       if (fabs(del) < (fabs(sum) * EPS)) {
@@ -127,9 +127,9 @@ void Test::gser(float *gamser, float a, float x, float *gln) {
 //gcf--- Returns the incomplete gamma function Q(a,x), evaulated by its 
 //continued fraction representation as gammcf.  Also returns natural log
 //of gamma as gln
-void Test::gcf(float *gammcf, float a, float x, float *gln) {
+void Test::gcf(double *gammcf, double a, double x, double *gln) {
   int i;
-  float an, b, c, d, del, h;
+  double an, b, c, d, del, h;
 
   *gln = gammln(a);
   b = x + 1.0 - a;
@@ -157,7 +157,7 @@ void Test::gcf(float *gammcf, float a, float x, float *gln) {
     }
   }
   if (i > ITMAX) {
-    nerror("a too large, ITMAX too small in continued fraction gamma function");
+    nerror("a too large, ITMAX too small in continued fraction gamma function (GCF)");
   }
   *gammcf = exp(-x + a * log(x) - (*gln)) * h;   //Put factors in front
   return;
@@ -165,7 +165,7 @@ void Test::gcf(float *gammcf, float a, float x, float *gln) {
 
 
 //gammln --- returns natural log of gamma(xx), for xx> 0
-float Test::gammln(float xx) {
+double Test::gammln(double xx) {
   double x, y, tmp, ser;
   static double cof[6] = {76.18009172947146, -86.50532032941677,
                           24.01409824083091, -1.231739572450155,
@@ -212,9 +212,9 @@ double Test::RunKSTest(double dist1[], int count1, double dist2[], int count2, i
 
 double Test::RunChiTest(double dist1[], int count1, double dist2[], int count2, int distSize) {
   int constraints = 0;
-  float chsq;
+  double chsq;
   double prob;
-  float df = 1;
+  double df = 1;
 
   chstwo(dist1, count1, dist2, count2, distSize, constraints, &df, &chsq, &prob);
   return prob;

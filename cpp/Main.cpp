@@ -171,7 +171,7 @@ void mexFunction(int nlhs, mxArray* plhs[], int nrhs, const mxArray* prhs[]) {
       mexErrMsgIdAndTxt("MATLAB:CSSR:conversionFailed", "Could not convert significance test mode to string. See https://github.com/randoruf/CSSR-Matlab for more help.");
     }
     // choose chi-square or ks ? 
-    if (strcmp(significanceTestMode, "chi") == 0 && isChi == false) {
+    if (strcmp(significanceTestMode, "ch") == 0 && isChi == false) {
       isChi = true;
       //std::cout << "Using Chi-squared significance test" << std::endl; 
     }else if (strcmp(significanceTestMode, "ks") == 0 && isChi == false) {

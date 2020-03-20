@@ -37,18 +37,18 @@ private:
     double RunChiTest(double dist1[], int count1, double dist2[], int count2,
                       int distSize);
 
-    float gammq(float a, float x);
+    double gammq(double a, double x);
 
-    void gcf(float *gammcf, float a, float x, float *gln);
+    void gcf(double *gammcf, double a, double x, double *gln);
 
-    void gser(float *gammser, float a, float x, float *gln);
+    void gser(double *gammser, double a, double x, double *gln);
 
     void nerror(const char error_text[]);
 
-    float gammln(float xx);
+    double gammln(double xx);
 
     void chstwo(double bins1[], int n1, double bins2[], int n2, int nbins,
-                int knstrn, float *df, float *chsq, double *prob);
+                int knstrn, double *df, double *chsq, double *prob);
 
     //KS Functions
     void KStwo(double data1[], unsigned long n1, double data2[],

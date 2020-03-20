@@ -1,4 +1,4 @@
-function out = runCSSR(alphabet, data, maxlength, siglevel, test_mode, ofilename)
+function out = runCSSR(alphabet, data, maxlength, ofilename, siglevel, test_mode)
 %__________________________________________________________________________
 % INPUTS
 %   - alphabet, is the char array which contains all symbols used in the input data stream
@@ -35,15 +35,16 @@ function out = runCSSR(alphabet, data, maxlength, siglevel, test_mode, ofilename
 %__________________________________________________________________________
 
 % set default arguments
+% (alphabet, data, maxlength, ofilename, siglevel, test_mode)
 if nargin == 3
+    ofilename = 'cssr';
     siglevel = 0.001;
     test_mode = 'ks'; 
-    ofilename = 'cssr';
 elseif nargin == 4
+    siglevel = 0.001;
     test_mode = 'ks'; 
-    ofilename = 'cssr';
 elseif nargin == 5
-    ofilename = 'cssr';
+    test_mode = 'ks'; 
 end
 
     
