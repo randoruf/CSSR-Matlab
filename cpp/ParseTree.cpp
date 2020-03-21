@@ -366,9 +366,11 @@ void ParseTree::GetDataInput(char dataFile[]) {
 // Post-Cond: Alphabet info in ParseTree is initialized
 //////////////////////////////////////////////////////////////////////////
 void ParseTree::GetAlphaInput(char alphabet[]) {
-  m_alpha = alphabet; 
+  m_alpha = new char[strlen(alphabet) + 1];
+  strcpy(m_alpha, alphabet);  
+  m_alpha[strlen(alphabet)] = '\0';  
+
   m_alphaSize = strlen(m_alpha);
-    
   return; 
 }
 
@@ -588,8 +590,11 @@ void ParseTree::ReadProcessMultiLine(char alphabet[], char dataFile[]) {
   ifstream inData(dataFile, ios::in);
 
   //read alphabet array
-  m_alpha = alphabet; 
+  m_alpha = new char[strlen(alphabet)+1];
+  strcpy(m_alpha, alphabet);  
+  m_alpha[strlen(alphabet)] = '\0';  
   m_alphaSize = strlen(m_alpha);
+
   //check alphabet
   for (int k = 0; k < m_alphaSize; k++) {
     if (!(isalnum(m_alpha[k]))) {
