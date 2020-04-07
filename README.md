@@ -77,6 +77,7 @@ out = runCSSR(alphabet, data, maxlength, ofilename, siglevel, test_mode)
     test_mode = 'ks'; 
     test_mode = 'ch'; 
     ```
+Note: using 'ch' may lead Matlab to crash. This is a known bug in the function taken from *Numerical Recipes in C*. Try to evaluate the command again if failing.  
 
 **Example usage :** 
 
