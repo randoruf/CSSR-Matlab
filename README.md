@@ -136,7 +136,7 @@ All main changes to CSSR can be viewed in GitHub [commits](https://github.com/ra
 
 ## Acknowledgements
 
-Although this is a small project, I still would like to say thanks to people in [tLab](https://sites.google.com/monash.edu/tlab/home). And I am grateful to the effort from [Cosma Shalizi](http://bactra.org/) and Kristina Klinkner, they purposed and developed the theory of CSSR. 
+Although this is a small project, I still would like to say thanks to people in [tLab](https://sites.google.com/monash.edu/tlab/home). I also want to say thanks to [Cosma Shalizi](http://bactra.org/) and Kristina Klinkner, they purposed and developed the theory of CSSR. 
 
 ## Related Resources
 
