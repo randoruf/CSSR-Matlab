@@ -47,7 +47,10 @@ elseif nargin == 5
     test_mode = 'ks'; 
 end
 
-    
+% Print copyright information
+fprintf("CSSR-Matlab is a non-official distribution of CSSR, comes with ABSOLUTELY NO WARRANTY; This is free software, and you are welcome to redistribute it under certain conditions. Read accompanying file 'LICENSE' for details. \n"); 
+fprintf("The original CSSR version 0.1.1, Copyright (C) 2002 Kristina Klinkner and Cosma Shalizi. Visit http://bactra.org/CSSR/ for details. \n\n"); 
+
 % determine whether to read text file
 if iscell(data) || ischar(data)
     % if pass a file name

@@ -82,9 +82,9 @@ out = runCSSR(alphabet, data, maxlength, ofilename, siglevel, test_mode)
 **Example usage :** 
 
 ```matlab
-% add CSSR-Matlab to the path
+% add CSSR-Matlab to the path, "C:\Users\????\Documents\MATLAB\CSSR-Matlab" in my case.
 if exist('runCSSR', 'file') ~= 2
-    cssr_path = fullfile(userpath, 'CSSR-Matlab');
+    cssr_path = fullfile(userpath, 'CSSR-Matlab'); 
     addpath(cssr_path);
 end 
 

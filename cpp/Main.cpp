@@ -183,7 +183,7 @@ void mexFunction(int nlhs, mxArray* plhs[], int nrhs, const mxArray* prhs[]) {
     mxFree(significanceTestMode);  // remember to clean up to avoid memory leak.
   }
 
-  PrintCopyrightInfo();
+  //PrintCopyrightInfo();
 
   //_________________________________________________________________________________________________
   //create parse tree to store all strings in data
