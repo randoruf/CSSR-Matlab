@@ -61,7 +61,7 @@ out = runCSSR(alphabet, data, maxlength, ofilename, siglevel, test_mode)
     % If using a relative path, files will be placed in the directory of the running script. 
     ofilename = 'cssr'; 
     % If using an absolute path, files will be placed in that directory. 
-    ofilename = 'C:\Users\massw\Desktop\cssr'
+    ofilename = 'C:\Users\????\Desktop\cssr'
     % Note that the current path is 'C:\Users\massw\Desktop' since 'cssr' is the output filename specified by the user.
     ```
 
