@@ -107,7 +107,7 @@ For details,  please refer to the official CSSR depository <https://github.com/s
 
 To install, download or clone from Github. Move all extracted files to a folder and add this folder to **Matlab path** (either by `addpath` function or `Set Path` button). 
 
-Once all files are ready, [link C++ compiler with Matlab](https://au.mathworks.com/help/matlab/matlab_external/choose-c-or-c-compilers.html) and run `makeCSSR.m` to compiles *mex* binaries for the first time. 
+Once all files are ready, [link C++ compiler with Matlab](https://au.mathworks.com/help/matlab/matlab_external/choose-c-or-c-compilers.html) and run `makeCSSR.m` to compiles *mex* binaries at the first time. 
 
 The recommended C++ compilers on different environments,  
 
