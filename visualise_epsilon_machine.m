@@ -81,18 +81,14 @@ while ~feof(fid)
     p = sscanf(tline(float_init:e),'%lf'); 
     p = round(p, precision); 
     
-    % ignore those lines with zero probability (since the rounding)
-    if (p > 0)
-        % map the old range to the new range (according to linewidth configuration) 
-        lw = (p - 0)*(linewidth(2) - linewidth(1)) +  linewidth(1);
-        color = 9 - round((p - 0)*(8 - 1) + 1); 
+    % map the old range to the new range (according to linewidth configuration) 
+    lw = (p - 0)*(linewidth(2) - linewidth(1)) +  linewidth(1);
+    color = 9 - round((p - 0)*(8 - 1) + 1); 
         
-        % with linewidth and color 
-        str_format = ['%s%.', int2str(precision), 'f"%s%.1f%s%d%s\n']; 
-        tempstr = sprintf(str_format, tline(1:float_init-1), p, ', penwidth=', lw, ', color=', color, ' ];');
-        
-        fprintf(fp, '%s', tempstr); 
-    end
+    % with linewidth and color 
+    str_format = ['%s%.', int2str(precision), 'f"%s%.1f%s%d%s\n']; 
+    tempstr = sprintf(str_format, tline(1:float_init-1), p, ', penwidth=', lw, ', color=', color, ' ];');    
+    fprintf(fp, '%s', tempstr); 
     
     % read the next new line....
     tline = fgetl(fid);
