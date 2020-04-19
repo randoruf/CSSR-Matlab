@@ -105,15 +105,19 @@ For details,  please refer to the official CSSR depository <https://github.com/s
 
 ## CSSR-Matlab Installation 
 
-To install, just download from Github. Then move all extracted files to the [default user work folder](https://au.mathworks.com/help/matlab/ref/userpath.html)
-
-[^1]: `$home/Documents/MATLAB`
-
- and add the path of CSSR-Matlab. 
-
-If you are familiar with git, you could alternatively clone CSSR-Matlab and add its path. 
+To install, download or clone from Github. Move all extracted files to a folder and add this folder to **Matlab path** (either by `addpath` function or `Set Path` button). 
 
 Once all files are ready, [link C++ compiler with Matlab](https://au.mathworks.com/help/matlab/matlab_external/choose-c-or-c-compilers.html) and run `makeCSSR.m` to compiles *mex* binaries for the first time. 
+
+The recommended C++ compilers on different environments,  
+
+| Operating System | C++ Compiler                            |
+| ---------------- | --------------------------------------- |
+| Windows          | *Microsoft Visual C++* or *MinGW C/C++* |
+| MacOS            | *Xcode*                                 |
+| Linux            | *GCC C/C++*                             |
+
+Further details about compilers can be viewed [here](https://www.mathworks.com/support/requirements/supported-compilers.html). (Linux usually uses a newer version of GCC while Matlab only supports out-of-date GCC compilers. It is safe to ignore the warnings because GCC will take care of older code.)
 
 
 ## CSSR Known Issues
