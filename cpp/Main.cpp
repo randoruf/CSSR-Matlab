@@ -192,8 +192,8 @@ void mexFunction(int nlhs, mxArray* plhs[], int nrhs, const mxArray* prhs[]) {
   //if using multi-line input, read in data and enter
   //tree one line at a time
   if (isMulti) {    
-    std::cout << "Multi-line option is set." << std::endl
-    << "Max line length is " << MAX_LINE_SIZE << "."<< std::endl;
+    // std::cout << "Multi-line option is set." << std::endl
+    // << "Max line length is " << MAX_LINE_SIZE << "."<< std::endl;
     parsetree.ReadProcessMultiLine(alphabet, data_txtfile);
   }
   else { //otherwise do data read first, then enter in tree
