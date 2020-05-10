@@ -1,7 +1,7 @@
 # CSSR-Matlab
 [![View CSSR-Matlab on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://au.mathworks.com/matlabcentral/fileexchange/74604-cssr-matlab)
 
-**Note that CSSR-Matlab is NOT an official distribution**. This program attempts to bind CSSR with Matlab such that CSSR can run within Matlab. 
+**Note that CSSR-Matlab is NOT an official distribution**. This program attempts to create a Matlab interface for CSSR.
 
 Before using CSSR-Matlab, it is recommended to read documentations published in the CSSR official website http://www.bactra.org/CSSR. CSSR-Matlab is based on CSSR, the original algorithm CSSR is developed by [Cosma Shalizi](http://bactra.org/) and Kristina Klinkner. 
 
