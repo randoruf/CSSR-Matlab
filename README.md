@@ -19,12 +19,12 @@ out = runCSSR(alphabet, data, maxlength, ofilename, siglevel, test_mode)
 
 * `alphabet` is the char array which contains all alphanumeric symbols used in the input data stream. 
 **NOTE:** only support `0-9`, `A-Z` and `a-z`. Each character represents a symbol emitted by the process.  
-Correct Example: 
+  Correct Example: 
   * ```matlab
     alphabet = 'ABC';
     alphabet = 'AB'; % or alphabet = '01';
     ```
-Wrong Example (`10` is not a symbol) : 
+  Wrong Example (`10` is not a symbol) : 
   * ```matlab
     alphabet = '012345678910';
     ```
