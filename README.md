@@ -17,11 +17,16 @@ To run CSSR in Matlab, navigator to the directory of **CSSR-Matlab** and execute
 out = runCSSR(alphabet, data, maxlength, ofilename, siglevel, test_mode)
 ```
 
-* `alphabet` is the char array which contains all symbols used in the input data stream. 
-
+* `alphabet` is the char array which contains all alphanumeric symbols used in the input data stream. 
+**NOTE:** only support `0-9`, `A-Z` and `a-z`. Each character represents a symbol emitted by the process.  
+Correct Example: 
   * ```matlab
     alphabet = 'ABC';
     alphabet = 'AB'; % or alphabet = '01';
+    ```
+Wrong Example (`10` is not a symbol) : 
+  * ```matlab
+    alphabet = '012345678910';
     ```
 
 * `data` is a collection of sequences of symbols (each sequence represents a distinct time series generated from the same stochastic process). If `data` has multiple rows, multiple-line mode will be turned on automatically. Note that data can be the file name of a text stream. 
