@@ -74,7 +74,7 @@ Correct Example:
 
 #### History Length 
 
-`maxlength` is the maximum history length considered in causal states. For example, CSSR could recover the first-order Markov Chain from a discrete sequence when L is set to 1. It is important to investigate the correct order of the process. Read [CSS Parameters](https://github.com/randoruf/CSSR-Matlab#cssr-parameters) for more details. 
+`maxlength` is the maximum history length considered in causal states. For example, CSSR could recover the first-order Markov Chain from a discrete sequence when L is set to 1. It is important to investigate the correct order of the process. If history length is too large, the result of CSSR may diverge from the true solution. Read [CSS Parameters](https://github.com/randoruf/CSSR-Matlab#cssr-parameters) for more details. 
 
 * ```matlab
   maxlength = 5; 
@@ -99,7 +99,7 @@ Correct Example:
 
 #### Significance Level
 
-`siglevel` is the significance level, it should be in the range of (0,1). This parameter is 0.001 by default.
+`siglevel` is the significance level in range from 0 to 1, which is the probability of mistakenly splitting a state. This parameter is 0.001 by default. 
 
 * ```matlab
   siglevel = 0.001;
@@ -166,11 +166,15 @@ Due to the limitations in the original C++ implementation, there are a few known
 
 ## CSSR Parameters
 
-One common question when using CSSR for the first time is how to choose the **history length** and **significance level**. 
+One common question when using CSSR for the first time is how to choose the **history length** and **significance level**. It is important to "tune" these two parameters which may affect the stability/accuracy of CSSR. 
 
-To converge to a true epsilon machine, make sure the history length L is longer than true Markov order M (e.g. **L >= M**), otherwise, the number of states returned **may be less or higher than the actual one**. 
+**Suggestions: ** 
 
-However, for a fixed-length N data stream, if keep increasing history length L further than the true Markov order of the given stationary stochastic process, **there is generally "blow up"** in the number of states.  
+> exploring the data at low L and high s initially, and then increasing L and lowering s. If a stable architecture is found, it should be recorded at the lowest possible L.
+
+To converge to a true epsilon machine, make sure the history length L is longer than true Markov order M (e.g. **L >= M**), otherwise, the number of states returned **may be incorrect** (less or higher than the actual one). 
+
+However, for a fixed-length N data stream, if keep increasing history length L further than the true Markov order, **there is generally "blow up"** in the number of states (diverge from the true solution).  
 
 For more details, please see https://github.com/stites/CSSR#4-some-suggestions-about-parameters. 
 
