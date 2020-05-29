@@ -1,13 +1,14 @@
 # CSSR-Matlab
 [![View CSSR-Matlab on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://au.mathworks.com/matlabcentral/fileexchange/74604-cssr-matlab)
 
+CSSR is also known as **epsilon machine**. 
 **Note that CSSR-Matlab is NOT an official distribution**. This program attempts to create a Matlab interface for CSSR.
 
 Before using CSSR-Matlab, it is recommended to read documentations published in the CSSR official website http://www.bactra.org/CSSR. CSSR-Matlab is based on CSSR, the original algorithm CSSR is developed by [Cosma Shalizi](http://bactra.org/) and Kristina Klinkner. 
 
 If you decide to use CSSR-Matlab, please appropriately cite the paper "Blind Construction of Optimal Nonlinear Recursive Predictors for Discrete Sequences",  [arXiv:cs/0406011 [cs.LG]](https://arxiv.org/abs/cs/0406011). 
 
-
+CSSR has been suceefully applied to brain signals. see [Brain signals can reveal how “awake” a fly’s brain is - MIT Technology Review](https://www.technologyreview.com/2019/06/14/134950/brain-signals-can-reveal-how-awake-a-flys-brain-is/) for details. 
 
 
 
@@ -168,7 +169,7 @@ Due to the limitations in the original C++ implementation, there are a few known
 
 One common question when using CSSR for the first time is how to choose the **history length** and **significance level**. It is important to "tune" these two parameters which may affect the stability/accuracy of CSSR. 
 
-**Suggestions: ** 
+**Suggestions:** 
 
 > exploring the data at low L and high s initially, and then increasing L and lowering s. If a stable architecture is found, it should be recorded at the lowest possible L.
 
