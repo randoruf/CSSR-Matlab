@@ -40,7 +40,7 @@ function [alphabet, outData] = symbolic_transfer_discretiser(inData, order, tau)
 % this program. If not, see <http://www.gnu.org/licenses/>.
 %________________________________________________________________________________
 
-error('I made mistakes in this discretiser, please ignore it. I will correct it if I have time ')
+error('I made mistakes in this discretiser, please ignore it. I will correct it if I have time. Please use other promising discretiser like median and diff')
 
 % check inputs and set defaults
 if nargin == 1
