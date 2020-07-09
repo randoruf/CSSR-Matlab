@@ -1,11 +1,11 @@
-function [alphabet, outData] = symbolic_transfer_discretiser(inData, order, tau)
+function [alphabet, outData] = symbolic_discretiser(inData, ord, tau)
 %________________________________________________________________________________
-% symbolic_transfer_discretiser 
+% symbolic_discretiser 
 %   Generate a symbolised sequence using the symbolic transformation Ref[4].
 %------------------------------------------------------------------------------
 %---INPUTS:
 %   inData, the time series.
-%   order,  the order of the permutation patterns.
+%   ord,  the order of the permutation patterns.
 %   tau,    the time-delay for the embedding.
 %
 %---OUTPUTS:
@@ -40,67 +40,68 @@ function [alphabet, outData] = symbolic_transfer_discretiser(inData, order, tau)
 % this program. If not, see <http://www.gnu.org/licenses/>.
 %________________________________________________________________________________
 
-error('I made mistakes in this discretiser, please ignore it. I will correct it if I have time. Please use other promising discretiser like median and diff')
-
 % check inputs and set defaults
 if nargin == 1
-    order = 2; 
-    tau   = 1;  % For EEG, tau = 1 is sufficient for most cases. see Ref[3]
+    ord = 2; 
+    tau = 1;  % the time interval between each pair of successive points in the patterns (instead points in the raw data). 
 else
     % check order and tau 
-    if order - round(order) ~= 0 || order < 1
-        error('Order of ordinal patterns must be a postive integer.')
+    if ord > 3
+        error('Order of ordinal patterns must be less than or equal to 3 (due to limitations of the epsilon machine')
     end 
-    if order > 2
-        error('Order of ordinal patterns must be less than or equal to 2(modify this limit in "symbolic_transfer_discretiser.m").')
-    end 
-    if tau - round(tau) ~= 0 || tau < 1 
-        error('Time-delay must be a postive integer.')
-    end 
+    % If order = n, then the total number of permutations is (n+1)!
+    % The size of the alphabet set that can be used in Epsilon machine is 62.  |A| = 62, which means there are 62 charaacters. 
+    % If order = 4, then the total number of permutations is 5! = 120. 
+    % This indicates the bound of order is 3. 
 end 
 
 % check if input series is valid 
 if size(inData, 1) ~= 1 
     error('Input data must be a 1-dimensional string!')
 end
-if size(inData, 2) < tau*order + 1 
-    error('Input time series is too short (not enough samples). Try to decrease time-delay or use a longer time series.')
-end 
 
 % full alphabet (but use up to the 24th letter)
+% if order = 2, we have Ax^2 + Bx + C, 
+% 	we need at least three points to solve three unknows. This is the  
 alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-num_pattern_points  = order + 1;
+num_pattern_points  = ord + 1;
 num_patterns = factorial(num_pattern_points);
 alphabet = alphabet(1:num_patterns);  % truncate the full alphabet 
 
 % existing ordinal patterns  
-permutation_list = perms(1:order+1); 
-% permutation_list
+permutation_list = perms(1:ord+1); 
 
 % generate a symbolised sequence according to the definition from
 % permutation entropy. See Ref[4]
 c_pattern = zeros(1, num_pattern_points);   % pre-allocate memory for c_pattern 
-outData   = blanks(length(inData)-tau*order-1); 
-outData_i = 0;  
 
-% start from the next pattern X(t0+1)
-for i = (order*tau+1) : 1 : length(inData)   
-    % rank by amplitude
-    [~,I] = sort(inData(i-order*tau : tau : i));
+% allocate memoery space for the output data 
+outData   = blanks(floor(length(inData)/(ord*tau)));
+
+
+% map each pattern to a symbol 
+i = ord*tau + 1;   
+j = 1; 
+while i <= length(inData)
+	% obtain the span that ending at i 
+    % and rank the points by amplitude 
+    [~,I] = sort(inData(i-ord*tau : tau : i));
     c_pattern(I) = 1:num_pattern_points; 
-    % c_pattern
     
-    % find the corresponded pattern 
+    % find the corresponded pattern. 
     for k = 1 : num_patterns
         % matching patterns (Ben's implementation), see Ref[1,2]
         if all(permutation_list(k,:)-c_pattern == 0)  
-            outData_i = outData_i + 1; 
-            outData(outData_i) = alphabet(k);  
+            outData(j) = alphabet(k); 
+            j = j + 1;
             break 
         end
     end
-    
-    % the end of iteratoon...
+
+    % increment to the index. 
+	i = i + tau*ord; 
 end 
+
+
 
 end 
