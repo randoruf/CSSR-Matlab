@@ -12,6 +12,16 @@ CSSR has been successfully applied to brain signals. see [Brain signals can reve
 
 
 
+## Time Series to Symbolic Vector 
+
+Roberto N. Muñoz 's paper "General anesthesia reduces complexity and temporal asymmetry of the informational structures derived from neural recordings in Drosophila", [ arXiv:1905.13173 [q-bio.NC]](https://arxiv.org/abs/1905.13173), converts the FLP signals to a binary sequence by using the median split.  
+
+There are some discretisers which can transform time series to symbolic vectors in this repository, including **median** and **mean split**. 
+
+In addition, some other interesting discretisers like multiple level split (based on percentiles) and symbolic transformation (proposed by this [paper](https://doi.org/10.1016/j.cub.2013.07.075)) are included. 
+
+
+
 ## CSSR-Matlab Usage 
 
 To run CSSR in Matlab, navigator to the directory of **CSSR-Matlab** and execute the following command
@@ -19,8 +29,6 @@ To run CSSR in Matlab, navigator to the directory of **CSSR-Matlab** and execute
 ```matlab
 out = runCSSR(alphabet, data, maxlength, ofilename, siglevel, test_mode)
 ```
-
-
 
 #### Alphabet Set
 
@@ -40,8 +48,6 @@ Correct Example:
   * ```matlab
     alphabet = '012345678910';
     ```
-
-
 
 #### Dataset
 
@@ -71,8 +77,6 @@ Correct Example:
      ABBABBABCACC
      ```
 
-
-
 #### History Length 
 
 `maxlength` is the maximum history length considered in causal states. For example, CSSR could recover the first-order Markov Chain from a discrete sequence when L is set to 1. It is important to investigate the correct order of the process. If history length is too large, the result of CSSR may diverge from the true solution. Read [CSS Parameters](https://github.com/randoruf/CSSR-Matlab#cssr-parameters) for more details. 
@@ -80,8 +84,6 @@ Correct Example:
 * ```matlab
   maxlength = 5; 
   ```
-
-
 
 #### Output Name
 
@@ -95,8 +97,6 @@ Correct Example:
   ofilename = 'C:\Users\????\Desktop\cssr'
   % Note that the current path is 'C:\Users\massw\Desktop' since 'cssr' is the output filename specified by the user.
   ```
-
-
 
 #### Significance Level
 
