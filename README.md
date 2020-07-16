@@ -155,7 +155,7 @@ The recommended C++ compilers on different environments,
 | MacOS            | *Xcode*                                 |
 | Linux            | *GCC C/C++*                             |
 
-Further details about compilers can be viewed [here](https://www.mathworks.com/support/requirements/supported-compilers.html). (Linux usually uses a newer version of GCC while Matlab only supports out-of-date GCC compilers. It is safe to ignore the warnings because GCC will take care of older code.)
+To set up the C++ compiler, follow the instruction prompted upon the Matlab command line window. Further details about compilers can be viewed [here](https://www.mathworks.com/support/requirements/supported-compilers.html). 
 
 
 
