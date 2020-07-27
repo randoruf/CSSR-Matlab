@@ -14,7 +14,7 @@ CSSR has been successfully applied to brain signals. see [Brain signals can reve
 
 ## Time Series to Symbolic Vector 
 
-Roberto N. Muñoz 's paper "General anesthesia reduces complexity and temporal asymmetry of the informational structures derived from neural recordings in Drosophila", [ arXiv:1905.13173 [q-bio.NC]](https://arxiv.org/abs/1905.13173), converts the FLP signals to a binary sequence by using the median split.  
+Roberto N. Muñoz 's paper "General anesthesia reduces complexity and temporal asymmetry of the informational structures derived from neural recordings in Drosophila", [ arXiv:1905.13173 [q-bio.NC]](https://arxiv.org/abs/1905.13173), converts the local field potential (LFP) signals to a binary sequence by using the median split.  
 
 There are some discretisers which can transform time series to symbolic vectors in this repository, including **median** and **difference split**. 
 
