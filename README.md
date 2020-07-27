@@ -8,7 +8,7 @@ Before using CSSR-Matlab, it is recommended to read documentations published in 
 
 If you decide to use CSSR-Matlab, please appropriately cite the paper "Blind Construction of Optimal Nonlinear Recursive Predictors for Discrete Sequences",  [arXiv:cs/0406011 [cs.LG]](https://arxiv.org/abs/cs/0406011). 
 
-CSSR has been successfully applied to brain signals. see [Brain signals can reveal how “awake” a fly’s brain is - MIT Technology Review](https://www.technologyreview.com/2019/06/14/134950/brain-signals-can-reveal-how-awake-a-flys-brain-is/) for details. 
+CSSR has been successfully applied to brain signals. see [Brain signals can reveal how “awake” a fly’s brain is - MIT Technology Review](https://www.technologyreview.com/2019/06/14/134950/brain-signals-can-reveal-how-awake-a-flys-brain-is/) and [Roberto's paper](https://doi.org/10.1103/PhysRevResearch.2.023219) for details.
 
 
 
