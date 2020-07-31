@@ -99,7 +99,7 @@ void mexFunction(int nlhs, mxArray* plhs[], int nrhs, const mxArray* prhs[]) {
     buffer = (char*) mxMalloc(buffer_len*sizeof(char)); // allocate memory space for the buffer
     for (size_t i = 0; i < M; i++){ //convert each line of time series, with buffer (limit is defined in MAX_LINE_SIZE+1).....
       if (mxGetString(mxGetCell(prhs[2], i), buffer, buffer_len) == 0) { //0 on success or if strlen == 0, and 1 on failure.
-        data[i] = (char*) mxMalloc((std::strlen(buffer)+END_STRING)*sizeof(char)); // .... create and allocate memory space for data[i]
+        data[i] = (char*) mxMalloc((strlen(buffer)+END_STRING)*sizeof(char)); // .... create and allocate memory space for data[i]
         strcpy(data[i], buffer); // .... copy string from buffer to data[i]
       }else { 
         mexErrMsgIdAndTxt("MATLAB:CSSR:conversionFailed", "Could not convert string data. Try to modify `MAX_LINE_SIZE` in ParseTree.h and then recompile or see https://github.com/randoruf/CSSR-Matlab for more help.");
