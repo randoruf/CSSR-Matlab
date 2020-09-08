@@ -116,7 +116,6 @@ Correct Example:
 ***Note***: **using 'ch' may lead Matlab to crash**. This is a known bug in the function taken from *Numerical Recipes in C*. Try to evaluate the command again if failing.  
 
 
-
 ## Example usage
 
 ```matlab
@@ -136,6 +135,13 @@ The output `out` is a structure which includes fields `out.Cmu`, `out.state_prob
 * `out.Cmu` the statistical complexity. 
 * `out.state_prob` the stationary probability distribution of each causal states. 
 * `out.state_series` the series of causal states in the data. 
+
+To access the state series, here is an example 
+```
+out.state_series{2, 1}{5}
+```
+It means taking the fifth symbol in the second sequence (the column index of the first curly bracket pair is always 1). 
+
 
 For details,  please refer to the official CSSR depository <https://github.com/stites/CSSR#3-usage>.
 
