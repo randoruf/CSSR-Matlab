@@ -261,7 +261,7 @@ void mexFunction(int nlhs, mxArray* plhs[], int nrhs, const mxArray* prhs[]) {
   delete machine; 
   delete[] output_name;
   delete[] data_txtfile;
-  mxFree(alphabet); 
+  // mxFree(alphabet); 
   mxFree(ofilename);
 
   /* Matlab outputs */ 
