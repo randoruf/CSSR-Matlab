@@ -7,7 +7,7 @@ function [alphabet, outData] = multi_level_discretiser(inData, n)
 % ---INPUTS:
 %   inData, a MxN matrix of a group of time series. Assume the each row is 
 %            an independent time series.
-%   n,      the number of characters. (n <= 26)
+%   n (n <= 26), the number of states, for example, when n = 2, it is median split. 
 %                                   
 % ---OUPUTS:
 %   alphabet, the set of all characters that appear in the symbolised
