@@ -220,3 +220,4 @@ Although this is a small project, I still would like to say thanks to people in 
 * tlab (Monash University) https://sites.google.com/monash.edu/tlab/home
 * The original website of CSSR http://bactra.org/CSSR/
 * Practical Computational Mechanics by James P. Crutchfield: http://csc.ucdavis.edu/~cmg/compmech/tutorials/pcm.pdf
+* My summer and winter research reports : https://github.com/randoruf/tlab-intern-code-2019-2020
