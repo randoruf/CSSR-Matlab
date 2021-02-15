@@ -28,9 +28,15 @@ Todo list (not completed yet):
 
 **Roberto N. Muñoz** 's paper "***General anesthesia reduces complexity and temporal asymmetry of the informational structures derived from neural recordings in Drosophila***", [ arXiv:1905.13173 [q-bio.NC]](https://arxiv.org/abs/1905.13173), converts the local field potential (LFP) signals to a binary sequence by using the median split.  
 
-There are some discretisers which can transform time series to symbolic vectors in this repository, including **median** and **difference split**. 
+There are some discretisers which can transform time series to symbolic vectors in the `discretiser` directory, including **median** and **difference split**. Here is an example for converting a time series into a symbolic vector by using the median binarization (the value that is higher than the median is denoted as 1, otherwise as 0).   
 
-In addition, some other interesting discretisers like multiple level split (based on percentiles) and symbolic transformation (proposed by this [paper](https://doi.org/10.1016/j.cub.2013.07.075)) are included. 
+![image-20210215193547025](https://raw.githubusercontent.com/randoruf/randoruf.github.io/main/shared/imgs/image-20210215193547025.png)
+
+Another recommended discretiser is difference binarization (denote the increment as 1, otherwise as 0). 
+
+<img src="https://raw.githubusercontent.com/randoruf/randoruf.github.io/main/shared/imgs/image-20210215195826278.png" alt="image-20210215195826278" style="zoom: 67%;" />
+
+In addition, some other interesting discretisers like multiple level split (based on percentiles) and symbolic transformation (proposed by this [paper](https://doi.org/10.1016/j.cub.2013.07.075)) are included. If you are interested in the definitions of these discretisers, please read the source code. 
 
 
 
@@ -221,3 +227,4 @@ Although this is a small project, I still would like to say thanks to people in 
 * The original website of CSSR http://bactra.org/CSSR/
 * Practical Computational Mechanics by James P. Crutchfield: http://csc.ucdavis.edu/~cmg/compmech/tutorials/pcm.pdf
 * My summer and winter research reports : https://github.com/randoruf/tlab-intern-code-2019-2020
+* 
