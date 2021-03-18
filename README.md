@@ -30,11 +30,11 @@ Todo list (not completed yet):
 
 There are some discretisers which can transform time series to symbolic vectors in the `discretiser` directory, including **median** and **difference split**. Here is an example for converting a time series into a symbolic vector by using the median binarization (the value that is higher than the median is denoted as 1, otherwise as 0).   
 
-![image-20210215193547025](https://raw.githubusercontent.com/randoruf/randoruf.github.io/main/shared/imgs/image-20210215193547025.png)
+![image-20210215193547025](https://randoruf.github.io/shared/imgs/image-20210215193547025.png)
 
 Another recommended discretiser is difference binarization (denote the increment as 1, otherwise as 0). 
 
-<img src="https://raw.githubusercontent.com/randoruf/randoruf.github.io/main/shared/imgs/image-20210215195826278.png" alt="image-20210215195826278" style="zoom: 67%;" />
+![image-20210215193547025](https://ran.moe/shared/imgs/image-20210215195826278.png)
 
 In addition, some other interesting discretisers like multiple level split (based on percentiles) and symbolic transformation (proposed by this [paper](https://doi.org/10.1016/j.cub.2013.07.075)) are included. If you are interested in the definitions of these discretisers, please read the source code. 
 
