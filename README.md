@@ -227,4 +227,4 @@ Although this is a small project, I still would like to say thanks to people in 
 * The original website of CSSR http://bactra.org/CSSR/
 * Practical Computational Mechanics by James P. Crutchfield: http://csc.ucdavis.edu/~cmg/compmech/tutorials/pcm.pdf
 * My summer and winter research reports : https://github.com/randoruf/tlab-intern-code-2019-2020
-* [Lempel–Ziv](https://web.stanford.edu/class/ee376a/files/EE376C_lecture_LZ.pdf) may help you to understand the underlying mechanism of CSSR.
+* [Lempel–Ziv](https://web.stanford.edu/class/ee376a/files/EE376C_lecture_LZ.pdf) may help you to understand the underlying mechanism of CSSR (in fact, it is a kind of decoding algorithms).
