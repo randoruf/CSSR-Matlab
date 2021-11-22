@@ -13,17 +13,6 @@ CSSR has been successfully applied to brain signals. see [Brain signals can reve
 If you are looking at Roberto's paper ***General anesthesia reduces complexity and temporal asymmetry of the informational structures derived from neural recordings in Drosophila***, and want to look at the code of temporal asymmetry properties, including causal irreversibility, crypticity and symmetric KL divergence rate, then [Aidan's code repository](https://github.com/aidan-zec/brain_machine) may help. 
 
 
-
-Todo list (not completed yet): 
-
-- [ ] Extension for [hctsa](https://github.com/benfulcher/hctsa)
-- [ ] Re-implement [Aidan's code](https://github.com/aidan-zec/brain_machine) to make it work for the alphabet has more than two symbols 
-- [ ] To see if [multitaper](https://www.youtube.com/watch?v=6qTD7qtHius) can improve the results (keep stationary for each clip)
-- [ ] To see if the [symbolic transformation discretiser](https://doi.org/10.1016/j.cub.2013.07.075) can improve the results. 
-- [ ] Apply this method to open sleep EEG dataset. 
-
-
-
 ## Time Series to Symbolic Vector 
 
 **Roberto N. Muñoz** 's paper "***General anesthesia reduces complexity and temporal asymmetry of the informational structures derived from neural recordings in Drosophila***", [ arXiv:1905.13173 [q-bio.NC]](https://arxiv.org/abs/1905.13173), converts the local field potential (LFP) signals to a binary sequence by using the median split.  
