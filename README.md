@@ -1,7 +1,7 @@
 > # NOTE:
-> If you know how to compile native C++ program, please set the C++ standard to C+11. 
-> Then go to CSSR orginal repository <https://github.com/stites/CSSR> download the source code and compile. 
-> Then use the Matlab script https://github.com/mmasque/CSSR_matlab_runner. 
+> If you know how to compile native C++ program, please specify the C++ standard to C+11. 
+> 
+> Then go to CSSR orginal repository <https://github.com/stites/CSSR> download the source code and compile and use the Matlab script https://github.com/mmasque/CSSR_matlab_runner. 
 
 # CSSR-Matlab
 
