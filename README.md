@@ -1,4 +1,10 @@
+> # NOTE:
+> If you know how to compile native C++ program, please set the C++ standard to C+11. 
+> Then go to CSSR orginal repository <https://github.com/stites/CSSR> download the source code and compile. 
+> Then use the Matlab script https://github.com/mmasque/CSSR_matlab_runner. 
+
 # CSSR-Matlab
+
 [![View CSSR-Matlab on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://au.mathworks.com/matlabcentral/fileexchange/74604-cssr-matlab)
 
 CSSR is also known as **epsilon machine**. 
